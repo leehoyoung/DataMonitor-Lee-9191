@@ -151,10 +151,12 @@
     <ClInclude Include="Model\Json.h" />
     <ClInclude Include="Model\Record.h" />
     <ClInclude Include="Model\Repository.h" />
+    <ClInclude Include="View\MonitorView.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Model\Json.cpp" />
     <ClCompile Include="Model\Repository.cpp" />
+    <ClCompile Include="View\MonitorView.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

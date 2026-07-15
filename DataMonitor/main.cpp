@@ -1,12 +1,10 @@
 #include <iostream>
 #include "Model/Repository.h"
+#include "View/MonitorView.h"
 
 int main() {
     RecordRepository repo("../../DataPersistence/CrudApp/data/records.json");
     repo.load();
-    std::cout << "Loaded " << repo.listAll().size() << " record(s)\n";
-    for (const auto& r : repo.listAll()) {
-        std::cout << "[" << r.id << "] " << r.name << " | " << r.description << " | " << r.createdAt << "\n";
-    }
+    renderDashboard(repo.listAll(), "(초기 로드)", false);
     return 0;
 }

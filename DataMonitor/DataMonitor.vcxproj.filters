@@ -18,10 +18,12 @@
     <ClInclude Include="Model\Json.h"><Filter>헤더 파일</Filter></ClInclude>
     <ClInclude Include="Model\Record.h"><Filter>헤더 파일</Filter></ClInclude>
     <ClInclude Include="Model\Repository.h"><Filter>헤더 파일</Filter></ClInclude>
+    <ClInclude Include="View\MonitorView.h"><Filter>헤더 파일</Filter></ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Model\Json.cpp"><Filter>소스 파일</Filter></ClCompile>
     <ClCompile Include="Model\Repository.cpp"><Filter>소스 파일</Filter></ClCompile>
+    <ClCompile Include="View\MonitorView.cpp"><Filter>소스 파일</Filter></ClCompile>
     <ClCompile Include="main.cpp"><Filter>소스 파일</Filter></ClCompile>
   </ItemGroup>
 </Project>
