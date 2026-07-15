@@ -5,6 +5,7 @@
 #include <ctime>
 #include <thread>
 #include <conio.h>
+#include <windows.h>
 #include "Model/Repository.h"
 #include "View/MonitorView.h"
 
@@ -46,6 +47,9 @@ bool checkForChange(std::filesystem::file_time_type& lastSeen, bool& fileMissing
 } // namespace
 
 int main() {
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
+
     RecordRepository repo(DATA_FILE_PATH);
     repo.load();
 

@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="DataMonitor/DataMonitor.vcxproj" />
+  <Project Path="DataMonitor/DataMonitor.vcxproj" Id="d508d84c-bb97-4fa3-bfd6-88cd208a1f39" />
 </Solution>
