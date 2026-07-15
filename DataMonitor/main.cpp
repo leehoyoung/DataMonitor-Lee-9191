@@ -33,8 +33,10 @@ bool checkForChange(std::filesystem::file_time_type& lastSeen, bool& fileMissing
         fileMissing = true;
         return !wasMissing; // 방금 사라졌다면 화면을 한 번 갱신
     }
+    bool wasMissing = fileMissing;
     fileMissing = false;
-    if (currentTime != lastSeen) {
+    // 파일이 없어졌다가 mtime이 바뀌지 않은 채로 복구된 경우도 화면을 갱신해야 경고가 사라진다.
+    if (currentTime != lastSeen || wasMissing) {
         lastSeen = currentTime;
         return true;
     }
