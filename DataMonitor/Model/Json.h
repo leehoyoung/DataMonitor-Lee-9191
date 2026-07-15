@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 // 최소 기능의 범용 JSON 파서/직렬화 라이브러리 (외부 의존성 없음)
 
 #include <string>
