@@ -4,8 +4,11 @@
 #include <chrono>
 #include <ctime>
 #include <thread>
+#include <conio.h>
 #include "Model/Repository.h"
 #include "View/MonitorView.h"
+
+void runSearchMode(RecordRepository& repo); // Task 5에서 구현
 
 namespace {
 
@@ -55,7 +58,28 @@ int main() {
     std::cout.flush();
 
     while (true) {
-        std::this_thread::sleep_for(POLL_INTERVAL);
+        bool quit = false;
+        auto sleepUntil = std::chrono::steady_clock::now() + POLL_INTERVAL;
+        while (std::chrono::steady_clock::now() < sleepUntil) {
+            if (_kbhit()) {
+                int ch = _getch();
+                if (ch == 'q' || ch == 'Q') {
+                    quit = true;
+                    break;
+                }
+                if (ch == 's' || ch == 'S') {
+                    runSearchMode(repo);
+                    checkForChange(lastSeen, fileMissing); // 검색 중 파일이 바뀌었을 수도 있으니 재확인
+                    lastChangeTime = nowTimestamp();
+                    clearScreen();
+                    renderDashboard(repo.listAll(), lastChangeTime, fileMissing);
+                    std::cout.flush();
+                    sleepUntil = std::chrono::steady_clock::now() + POLL_INTERVAL;
+                }
+            }
+            std::this_thread::sleep_for(std::chrono::milliseconds(50));
+        }
+        if (quit) break;
 
         if (checkForChange(lastSeen, fileMissing)) {
             if (!fileMissing) repo.load();
@@ -67,4 +91,9 @@ int main() {
     }
 
     return 0;
+}
+
+void runSearchMode(RecordRepository&) {
+    std::cout << "\n(검색 모드는 다음 작업에서 구현됩니다. 아무 키나 누르세요...)\n";
+    _getch();
 }
