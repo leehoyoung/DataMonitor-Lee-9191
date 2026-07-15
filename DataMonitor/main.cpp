@@ -93,7 +93,35 @@ int main() {
     return 0;
 }
 
-void runSearchMode(RecordRepository&) {
-    std::cout << "\n(검색 모드는 다음 작업에서 구현됩니다. 아무 키나 누르세요...)\n";
+void runSearchMode(RecordRepository& repo) {
+    std::cout << "\n===================== 검색 =====================\n";
+    std::cout << "[1] ID 검색  [2] 이름 키워드 검색  [0] 뒤로가기\n";
+    std::cout << "선택 > ";
+    std::string choice;
+    std::getline(std::cin, choice);
+
+    if (choice == "1") {
+        std::cout << "검색할 ID > ";
+        std::string idInput;
+        std::getline(std::cin, idInput);
+        try {
+            int id = std::stoi(idInput);
+            const Record* r = repo.findById(id);
+            if (r) {
+                renderRecordTable(std::vector<Record>{*r});
+            } else {
+                std::cout << "ID " << id << " 에 해당하는 데이터를 찾을 수 없습니다.\n";
+            }
+        } catch (...) {
+            std::cout << "올바른 ID를 입력해주세요.\n";
+        }
+    } else if (choice == "2") {
+        std::cout << "검색어 > ";
+        std::string keyword;
+        std::getline(std::cin, keyword);
+        renderRecordTable(repo.searchByNameKeyword(keyword));
+    }
+
+    std::cout << "\n대시보드로 돌아가려면 아무 키나 누르세요...\n";
     _getch();
 }
